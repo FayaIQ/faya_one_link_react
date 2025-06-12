@@ -6,7 +6,8 @@ export default function RootLayout({ children }) {
     <html lang="ar">
       <head />
       <body>
-        {children}              // 2. محتوى الصفحة (صفحتك البيضاء سابقاً)
+        {/* 2. محتوى الصفحة (صفحتك البيضاء سابقاً) */}
+        {children}
       </body>
     </html>
   );
