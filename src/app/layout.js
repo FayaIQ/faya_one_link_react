@@ -1,12 +1,12 @@
 // src/app/layout.js
-import './globals.css';         // 1. استيراد أنماط Tailwind أولاً
+import './globals.css';       
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ar">
       <head />
       <body>
-        {children}              // 2. محتوى الصفحة (صفحتك البيضاء سابقاً)
+        {children}              
       </body>
     </html>
   );
