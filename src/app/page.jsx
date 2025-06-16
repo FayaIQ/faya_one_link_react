@@ -125,7 +125,7 @@ function Slideshow() {
   }, []);
   return (
     <div className="my-24">
-      <div className="relative mx-auto max-w-4xl aspect-video overflow-hidden rounded-3xl shadow-xl">
+      <div className="relative mx-auto max-w-5xl aspect-[2/1] overflow-hidden rounded-3xl shadow-xl">
         {sliderImages.map((src, i) => (
           <Image
             key={src}
@@ -135,6 +135,11 @@ function Slideshow() {
             className={`object-cover transition-opacity duration-1000 ${i === index ? 'opacity-100' : 'opacity-0'}`}
           />
         ))}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {sliderImages.map((_, i) => (
+            <span key={i} className={`h-2 w-2 rounded-full ${i === index ? 'bg-white' : 'bg-white/50'}`} />
+          ))}
+        </div>
       </div>
     </div>
   );
