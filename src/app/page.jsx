@@ -130,7 +130,7 @@ export default function LandingPage() {
       >
         {/* HERO */}
         <header className="relative isolate overflow-hidden pt-28 pb-32">
-          <div className="absolute inset-0 -z-10 bg-[url('/images/hero-pattern.svg')] bg-cover opacity-10" />
+          <div className="absolute inset-0 -z-10 bg-[url('/images/D924F00A.png')] bg-cover opacity-40" />
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -168,7 +168,7 @@ export default function LandingPage() {
           <div className="absolute inset-0 -z-10 pointer-events-none bg-gradient-to-b from-transparent via-indigo-50 to-transparent" />
 
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-            <h2 className="section-title mb-16">منتجاتنا</h2>
+            <h1 className="section-title text-3xl text-slate-1000 mb-16">منتجاتنا</h1>
 
             <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {products.map(prod => (
@@ -207,7 +207,7 @@ export default function LandingPage() {
         {/* SERVICES */}
         <section className="bg-slate-50/60 backdrop-blur-sm py-24">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-            <h2 className="section-title mb-16 text-slate-800">خدماتنا</h2>
+            <h1 className="section-title text-3xl mb-16 text-slate-800">خدماتنا</h1>
 
             <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {services.map((svc, idx) => {
