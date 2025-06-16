@@ -20,7 +20,7 @@ const services = [
   { id: 1, title: 'تصميم المتاجر الإلكترونية', icon: FaShoppingCart, badge: null },
   { id: 2, title: 'برمجة مواقع الويب', icon: FaCode, badge: null },
   { id: 3, title: 'برمجة تطبيقات الموبايل', icon: FaMobileAlt, badge: null },
-  { id: 4, title: 'الأنظمة المحاسبية', icon: FaCalculator, badge: null },
+  { id: 4, title: 'الأنظمة المالية', icon: FaCalculator, badge: null },
   { id: 5, title: 'البريد الإلكتروني المخصص', icon: FaEnvelope, badge: 'مجاني' },
   { id: 6, title: 'حلول برمجية مخصصة', icon: FaCogs, badge: null },
   { id: 7, title: 'تطبيقات الإنترنت', icon: FaCloud, badge: null },
@@ -31,18 +31,18 @@ const services = [
 // بيانات المنتجات
 const products = [
   {
-    id: 1,
+    id: 7,
     title: 'Faya ERP',
     desc: 'منصة متكاملة لإدارة أنشطة المؤسسات',
     img: '/images/faya-erp.png',
-    link: '/products/faya-erp'
+    link: 'https://erp.faya.dev/'
   },
   {
     id: 2,
-    title: 'Faya Mobile',
-    desc: 'تطبيق ذكي لإدارة الأعمال عن بُعد',
-    img: '/images/faya-mobile.png',
-    link: '/products/faya-mobile'
+    title: 'Faya E-Menu',
+    desc: 'تطبيق يقدم للمطاعم منيو ألكتروني متكامل',
+    img: '/images/faya-menu.png',
+    link: 'https://emenu.faya.dev/'
   },
   {
     id: 3,
@@ -57,6 +57,41 @@ const products = [
     desc: 'إدارة الموارد البشرية وجدولة الموظفين',
     img: '/images/faya-staff.png',
     link: '/products/faya-staff'
+  },
+  {
+    id: 5,
+    title: 'Faya Press',
+    desc: 'نظام إصدار الفواتير والإشعارات بسهولة',
+    img: '/images/faya-press.png',
+    link: '/products/faya-press'
+  },
+  {
+    id: 6,
+    title: 'Faya CRM',
+    desc: 'نظام إصدار الفواتير والإشعارات بسهولة',
+    img: '/images/faya-CRM.png',
+    link: 'https://teams.faya.dev/#/FayaCRM'
+  },
+  {
+    id: 1,
+    title: 'Faya Onelink',
+    desc: 'نظام إصدار الفواتير والإشعارات بسهولة',
+    img: '/images/faya-Onelink.png',
+    link: 'https://teams.faya.dev/#/FayaOneLink'
+  },
+  {
+    id: 8,
+    title: 'Faya Survey',
+    desc: 'نظام إصدار الفواتير والإشعارات بسهولة',
+    img: '/images/faya-Survey.png',
+    link: 'https://teams.faya.dev/#/fayaSurvey'
+  },
+  {
+    id: 9,
+    title: 'Faya RX',
+    desc: 'نظام إصدار الفواتير والإشعارات بسهولة',
+    img: '/images/faya-RX.png',
+    link: 'https://rx.faya.dev/'
   }
 ];
 
@@ -102,9 +137,7 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 text-center"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8 text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-indigo-600 drop-shadow-md">
-              فيا ديف للحلول البرمجية
-            </h1>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#8166E4] via-[#828BE6] to-[#83AFE9] drop-shadow-md">فيا ديف, للحلول البرمجية</h1>
             <p className="text-lg md:text-xl lg:text-2xl text-slate-600 mb-10 max-w-3xl mx-auto">
               نُحوّل أفكارك إلى منصات رقمية مُبهرة، تدفع أعمالك نحو المستقبل.
             </p>
@@ -118,12 +151,8 @@ export default function LandingPage() {
                 </span>
               ))}
             </div>
-            <a
-              href="#our-products"
-              className="inline-block rounded-full bg-indigo-600 px-10 py-4 text-white font-semibold tracking-wide shadow-lg hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 transition"
-            >
-              اكتشف منتجاتنا
-            </a>
+            <a href="#our-products" className="inline-block rounded-full bg-[#8054E3] px-10 py-4 text-white font-semibold tracking-wide shadow-lg hover:bg-[#6F47CE] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8054E3] transition">اكتشف منتجاتنا</a>
+
           </motion.div>
         </header>
 
@@ -236,7 +265,7 @@ export default function LandingPage() {
         {/* FOOTER */}
         <footer className="bg-white/70 backdrop-blur border-t border-slate-200 py-12 text-center text-slate-600 text-sm">
           <address className="not-italic leading-relaxed">
-            العراق · بغداد · الزوراء · الشارع الرئيسي · بناية زيونة<br />
+            العراق · بغداد · زيونة · الشارع الخدمي · بناية زيونة ستارز 3 · الطابق الثاني شقة 108<br />
             جميع الحقوق محفوظة © {new Date().getFullYear()} فيا ديف
           </address>
         </footer>
@@ -262,6 +291,3 @@ export default function LandingPage() {
     </>
   );
 }
-
-
-
