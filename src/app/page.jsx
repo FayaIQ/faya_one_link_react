@@ -108,6 +108,38 @@ const gradients = [
   'from-slate-200/40 to-slate-300/40'
 ];
 
+const sliderImages = [
+  '/images/faya-erp.png',
+  '/images/faya-CRM.png',
+  '/images/faya-menu.png'
+];
+
+function Slideshow() {
+  const [index, setIndex] = React.useState(0);
+  React.useEffect(() => {
+    const id = setInterval(
+      () => setIndex(i => (i + 1) % sliderImages.length),
+      3000
+    );
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="my-24">
+      <div className="relative mx-auto max-w-4xl aspect-video overflow-hidden rounded-3xl shadow-xl">
+        {sliderImages.map((src, i) => (
+          <Image
+            key={src}
+            src={src}
+            alt="slide"
+            fill
+            className={`object-cover transition-opacity duration-1000 ${i === index ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
   return (
     <>
@@ -155,6 +187,9 @@ export default function LandingPage() {
 
           </motion.div>
         </header>
+
+        {/* SLIDESHOW */}
+        <Slideshow />
 
         {/* PRODUCTS */}
         <motion.section
@@ -254,10 +289,10 @@ export default function LandingPage() {
               اتصل بنا اليوم واحصل على استشارة مجانية مع خبراء فيا ديف لتحديد المتطلبات، وضع خارطة الطريق، والبدء في التنفيذ.
             </p>
             <a
-              href="tel:+9647700000000"
+              href="https://wa.me/9647822445666"
               className="inline-block rounded-full bg-emerald-600 px-12 py-4 text-white font-semibold shadow-lg hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition"
             >
-              اتصل الآن
+              اتصل عبر واتساب
             </a>
           </div>
         </motion.section>
