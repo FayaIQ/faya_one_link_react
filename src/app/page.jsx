@@ -254,10 +254,10 @@ export default function LandingPage() {
               اتصل بنا اليوم واحصل على استشارة مجانية مع خبراء فيا ديف لتحديد المتطلبات، وضع خارطة الطريق، والبدء في التنفيذ.
             </p>
             <a
-              href="tel:+9647700000000"
+              href="https://wa.me/9647822445666"
               className="inline-block rounded-full bg-emerald-600 px-12 py-4 text-white font-semibold shadow-lg hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition"
             >
-              اتصل الآن
+              اتصل عبر واتساب
             </a>
           </div>
         </motion.section>
