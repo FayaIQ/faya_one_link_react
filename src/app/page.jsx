@@ -3,6 +3,9 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import {
   FaShoppingCart,
   FaCode,
@@ -108,6 +111,51 @@ const gradients = [
   'from-slate-200/40 to-slate-300/40'
 ];
 
+const sliderImages = [
+  '/images/faya-erp.png',
+  '/images/faya-CRM.png',
+  '/images/faya-menu.png',
+  '/images/faya-press.png',
+  '/images/faya-Onelink.png',
+  '/images/faya-staff.png',
+  '/images/faya-RX.png'
+];
+
+function Slideshow() {
+  const settings = {
+    dots: true,
+    arrows: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
+  const slides = [sliderImages];
+
+  return (
+    <div className="my-24 px-6">
+      <Slider {...settings}>
+        {slides.map((images, idx) => (
+          <div key={idx}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-7 gap-4">
+              {images.map((src, i) => (
+                <div
+                  key={src + i}
+                  className={`relative h-32 sm:h-40 md:h-56 ${i === 1 ? 'sm:col-span-3 md:col-span-3' : 'col-span-1'} rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-slate-100 via-white to-slate-200`}
+                >
+                  <Image src={src} alt="slide" fill className="object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+}
+
 export default function LandingPage() {
   return (
     <>
@@ -155,6 +203,9 @@ export default function LandingPage() {
 
           </motion.div>
         </header>
+
+        {/* SLIDESHOW */}
+        <Slideshow />
 
         {/* PRODUCTS */}
         <motion.section
@@ -254,10 +305,10 @@ export default function LandingPage() {
               اتصل بنا اليوم واحصل على استشارة مجانية مع خبراء فيا ديف لتحديد المتطلبات، وضع خارطة الطريق، والبدء في التنفيذ.
             </p>
             <a
-              href="tel:+9647700000000"
+              href="https://wa.me/9647822445666"
               className="inline-block rounded-full bg-emerald-600 px-12 py-4 text-white font-semibold shadow-lg hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition"
             >
-              اتصل الآن
+              اتصل عبر واتساب
             </a>
           </div>
         </motion.section>
