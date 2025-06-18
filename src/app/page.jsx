@@ -12,7 +12,9 @@ import {
   FaCogs,
   FaCloud,
   FaUtensils,
-  FaBullhorn
+  FaBullhorn,
+  FaChevronLeft,
+  FaChevronRight
 } from 'react-icons/fa';
 
 // بيانات الخدمات
@@ -116,26 +118,71 @@ const sliderImages = [
 
 function Slideshow() {
   const [index, setIndex] = React.useState(0);
+  const timeoutRef = React.useRef();
+
+  const resetTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+
   React.useEffect(() => {
-    const id = setInterval(
+    resetTimeout();
+    timeoutRef.current = setTimeout(
       () => setIndex(i => (i + 1) % sliderImages.length),
-      3000
+      4000
     );
-    return () => clearInterval(id);
-  }, []);
+    return () => resetTimeout();
+  }, [index]);
+
+  const prevSlide = () => {
+    setIndex(i => (i - 1 + sliderImages.length) % sliderImages.length);
+  };
+
+  const nextSlide = () => {
+    setIndex(i => (i + 1) % sliderImages.length);
+  };
+
   return (
     <div className="my-24">
-      <div className="relative mx-auto max-w-4xl aspect-video overflow-hidden rounded-3xl shadow-xl">
+      <div className="relative mx-auto w-full max-w-5xl md:max-w-6xl aspect-video overflow-hidden rounded-3xl shadow-xl group">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 z-10" />
         {sliderImages.map((src, i) => (
           <Image
             key={src}
             src={src}
             alt="slide"
-            fill
-            unoptimized
             className={`object-cover transition-opacity duration-1000 ${i === index ? 'opacity-100' : 'opacity-0'}`}
           />
         ))}
+
+        {/* Controls */}
+        <button
+          aria-label="السابق"
+          onClick={prevSlide}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/70 p-2 text-slate-700 shadow hover:bg-white opacity-0 group-hover:opacity-100 transition"
+        >
+          <FaChevronLeft />
+        </button>
+        <button
+          aria-label="التالي"
+          onClick={nextSlide}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/70 p-2 text-slate-700 shadow hover:bg-white opacity-0 group-hover:opacity-100 transition"
+        >
+          <FaChevronRight />
+        </button>
+
+        {/* Indicators */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+          {sliderImages.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`الانتقال الى الشريحة ${i + 1}`}
+              onClick={() => setIndex(i)}
+              className={`h-3 w-3 rounded-full transition-colors ${i === index ? 'bg-indigo-600' : 'bg-white/60'}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
