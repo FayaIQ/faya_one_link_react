@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
+import ImageUploadSlider from "../components/ImageUploadSlider";
 import {
   FaShoppingCart,
   FaCode,
@@ -142,6 +143,11 @@ export default function LandingPage() {
                   </div>
                 ))}
               </Slider>
+            </div>
+
+            {/* Slider that allows uploading custom images */}
+            <div className="mb-16">
+              <ImageUploadSlider />
             </div>
             <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {products.map((prod) => (
