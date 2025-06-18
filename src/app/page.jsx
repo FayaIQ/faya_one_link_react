@@ -4,9 +4,9 @@
 import React from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import SupabaseSlider from "@/components/SupabaseSlider";
 import { motion } from "framer-motion";
 import {
   FaShoppingCart,
@@ -58,28 +58,6 @@ const gradients = [
   "from-slate-200/40 to-slate-300/40"
 ];
 
-// —————————— إعدادات السلايدر ——————————
-const sliderSettings = {
-  dots: true,                   // تفعيل عداد النقاط :contentReference[oaicite:0]{index=0}
-  infinite: true,               // للتكرار اللانهائي
-  speed: 800,                   // سرعة التحريك (مللي ثواني)
-  slidesToShow: 1,              // شريحة واحدة ظاهرة
-  slidesToScroll: 1,            // التمرير شريحة واحدة في كل مرة
-  autoplay: true,               // تفعيل التشغيل التلقائي :contentReference[oaicite:1]{index=1}
-  autoplaySpeed: 3000,          // المدة بين كل انتقال (3 ثواني)
-  pauseOnHover: true,           // إيقاف مؤقت عند المرور بالفأرة
-  appendDots: dots => (
-    <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-      <ul className="flex space-x-2 pointer-events-auto">{dots}</ul>
-    </div>
-  ),                             // وضع النقاط في منتصف السلايدر :contentReference[oaicite:2]{index=2}
-  customPaging: i => (
-    <button
-      className="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200"
-      aria-label={`شريحة ${i + 1}`}
-    />
-  )                              // تصميم مخصص لكل نقطة
-};
 export default function LandingPage() {
   return (
     <>
@@ -149,25 +127,7 @@ export default function LandingPage() {
 
             {/* Slider */}
             <div className="mb-16">
-              <Slider {...sliderSettings}>
-                {products.map((prod) => (
-                  <div key={prod.id} className="px-2">
-                    <div className="relative h-64 sm:h-80 md:h-96 rounded-3xl group relative flex flex-col overflow-hidden rounded-3xl bg-white/70 backdrop-blur border border-slate-200 transition-all">
-                      <Image
-                        src={"/images/faya-erp.png"}
-                        alt={prod.title}
-                        fill
-                        unoptimized
-                        className="object-cover"
-                        sizes="(min-width: 768px) 70vw, 90vw"
-                      />
-                      <div className="absolute inset-0 flex items-end p-4">
-                        <h3 className="text-white text-xl font-semibold">{prod.title}</h3>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </Slider>
+              <SupabaseSlider />
             </div>
 
             {/* Grid */}
