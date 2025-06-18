@@ -8,7 +8,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
-import ImageUploadSlider from "../components/ImageUploadSlider";
 import {
   FaShoppingCart,
   FaCode,
@@ -144,42 +143,8 @@ export default function LandingPage() {
                 ))}
               </Slider>
             </div>
-
-            {/* Slider that allows uploading custom images */}
-            <div className="mb-16">
-              <ImageUploadSlider />
-            </div>
-            <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-              {products.map((prod) => (
-                <motion.article
-                  key={prod.id}
-                  className="group relative flex flex-col overflow-hidden rounded-3xl bg-white/70 backdrop-blur border border-slate-200 shadow-lg hover:shadow-xl transition-all"
-                  whileHover={{ y: -6 }}
-                >
-                  <div className="relative w-full aspect-square overflow-hidden">
-                    <Image
-                      src={prod.img}
-                      alt={prod.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(min-width: 1024px) 250px, 40vw"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-3 p-8 flex-grow">
-                    <h3 className="text-xl font-bold text-slate-800">{prod.title}</h3>
-                    <p className="text-sm text-slate-600 flex-grow leading-relaxed min-h-[3rem]">
-                      {prod.desc}
-                    </p>
-                    <a href={prod.link} className="mt-auto self-start inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-700 font-medium transition">
-                      المزيد →
-                    </a>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
           </div>
         </motion.section>
-
         {/* SERVICES */}
         <section className="bg-slate-50/60 backdrop-blur-sm py-24">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
