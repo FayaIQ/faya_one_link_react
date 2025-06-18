@@ -152,8 +152,6 @@ function Slideshow() {
             key={src}
             src={src}
             alt="slide"
-            fill
-            sizes="(min-width: 768px) 80vw, 100vw"
             className={`object-cover transition-opacity duration-1000 ${i === index ? 'opacity-100' : 'opacity-0'}`}
           />
         ))}
@@ -267,6 +265,7 @@ export default function LandingPage() {
                       src={prod.img}
                       alt={prod.title}
                       fill
+                      unoptimized
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(min-width: 1024px) 250px, 40vw"
                     />
