@@ -122,6 +122,27 @@ export default function LandingPage() {
           <div className="absolute inset-0 -z-10 pointer-events-none bg-gradient-to-b from-transparent via-indigo-50 to-transparent" />
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
             <h1 className="section-title text-3xl text-slate-1000 mb-16">منتجاتنا</h1>
+            {/* Slider showcasing product images */}
+            <div className="mb-16">
+              <Slider {...sliderSettings}>
+                {products.map((prod) => (
+                  <div key={prod.id} className="px-2">
+                    <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden rounded-3xl">
+                      <Image
+                        src={prod.img}
+                        alt={prod.title}
+                        fill
+                        className="object-cover w-full h-full"
+                        sizes="(min-width: 768px) 70vw, 90vw"
+                      />
+                      <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+                        <h3 className="text-white text-xl font-semibold">{prod.title}</h3>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
             <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {products.map((prod) => (
                 <motion.article
