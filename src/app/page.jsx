@@ -20,7 +20,7 @@ import {
   FaBullhorn
 } from "react-icons/fa";
 
-// بيانات الخدمات
+// —————————— بيانات الخدمات ——————————
 const services = [
   { id: 1, title: "تصميم المتاجر الإلكترونية", icon: FaShoppingCart, badge: null },
   { id: 2, title: "برمجة مواقع الويب", icon: FaCode, badge: null },
@@ -33,19 +33,19 @@ const services = [
   { id: 9, title: "التسويق الإلكتروني", icon: FaBullhorn, badge: null }
 ];
 
-// بيانات المنتجات
+// —————————— بيانات المنتجات ——————————
 const products = [
-  { id: 7, title: "Faya ERP", desc: "منصة متكاملة لإدارة أنشطة المؤسسات", img: "/images/faya-erp.png", link: "https://erp.faya.dev/" },
-  { id: 2, title: "Faya E-Menu", desc: "تطبيق يقدم للمطاعم منيو ألكتروني متكامل", img: "/images/faya-menu.png", link: "https://emenu.faya.dev/" },
-  { id: 3, title: "Faya Press", desc: "نظام إصدار الفواتير والإشعارات بسهولة", img: "/images/faya-press.png", link: "/products/faya-press" },
-  { id: 4, title: "Faya Staff", desc: "إدارة الموارد البشرية وجدولة الموظفين", img: "/images/faya-staff.png", link: "/products/faya-staff" },
-  { id: 6, title: "Faya CRM", desc: "نظام إصدار الفواتير والإشعارات بسهولة", img: "/images/faya-CRM.png", link: "https://teams.faya.dev/#/FayaCRM" },
-  { id: 1, title: "Faya Onelink", desc: "نظام إصدار الفواتير والإشعارات بسهولة", img: "/images/faya-Onelink.png", link: "https://teams.faya.dev/#/FayaOneLink" },
-  { id: 8, title: "Faya Survey", desc: "نظام إصدار الفواتير والإشعارات بسهولة", img: "/images/faya-Survey.png", link: "https://teams.faya.dev/#/fayaSurvey" },
-  { id: 9, title: "Faya RX", desc: "نظام إصدار الفواتير والإشعارات بسهولة", img: "/images/faya-RX.png", link: "https://rx.faya.dev/" }
+  { id: 1, title: "Faya ERP",     desc: "منصة متكاملة لإدارة أنشطة المؤسسات",    img: "/images/faya-erp.png",     link: "https://erp.faya.dev/" },
+  { id: 2, title: "Faya E-Menu",  desc: "تطبيق يقدم للمطاعم منيو إلكتروني متكامل", img: "/images/faya-menu.png",    link: "https://emenu.faya.dev/" },
+  { id: 3, title: "Faya Press",   desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-press.png",   link: "/products/faya-press" },
+  { id: 4, title: "Faya Staff",   desc: "إدارة الموارد البشرية وجدولة الموظفين",     img: "/images/faya-staff.png",   link: "/products/faya-staff" },
+  { id: 5, title: "Faya CRM",     desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-CRM.png",     link: "https://teams.faya.dev/#/FayaCRM" },
+  { id: 6, title: "Faya OneLink", desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-Onelink.png", link: "https://teams.faya.dev/#/FayaOneLink" },
+  { id: 7, title: "Faya Survey",  desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-Survey.png", link: "https://teams.faya.dev/#/fayaSurvey" },
+  { id: 8, title: "Faya RX",      desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-RX.png",      link: "https://rx.faya.dev/" }
 ];
 
-// تدرجات لونية للكروت
+// —————————— تدرجات الألوان للكروت ——————————
 const gradients = [
   "from-blue-200/40 to-blue-300/40",
   "from-green-200/40 to-green-300/40",
@@ -58,57 +58,81 @@ const gradients = [
   "from-slate-200/40 to-slate-300/40"
 ];
 
-// إعدادات React Slick للسلايدر
+// —————————— إعدادات السلايدر ——————————
 const sliderSettings = {
-  dots: true,
-  infinite: true,
-  speed: 600,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  fade: true,
-  autoplay: true,
-  autoplaySpeed: 3000,
-  arrows: true,
-  adaptiveHeight: false
+  dots: true,                   // تفعيل عداد النقاط :contentReference[oaicite:0]{index=0}
+  infinite: true,               // للتكرار اللانهائي
+  speed: 800,                   // سرعة التحريك (مللي ثواني)
+  slidesToShow: 1,              // شريحة واحدة ظاهرة
+  slidesToScroll: 1,            // التمرير شريحة واحدة في كل مرة
+  autoplay: true,               // تفعيل التشغيل التلقائي :contentReference[oaicite:1]{index=1}
+  autoplaySpeed: 3000,          // المدة بين كل انتقال (3 ثواني)
+  pauseOnHover: true,           // إيقاف مؤقت عند المرور بالفأرة
+  appendDots: dots => (
+    <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+      <ul className="flex space-x-2 pointer-events-auto">{dots}</ul>
+    </div>
+  ),                             // وضع النقاط في منتصف السلايدر :contentReference[oaicite:2]{index=2}
+  customPaging: i => (
+    <button
+      className="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200"
+      aria-label={`شريحة ${i + 1}`}
+    />
+  )                              // تصميم مخصص لكل نقطة
 };
-
 export default function LandingPage() {
   return (
     <>
       <Head>
         <title>فيا ديف للحلول البرمجية</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700;800&display=swap"
           rel="stylesheet"
         />
       </Head>
 
-      <main dir="rtl" style={{ fontFamily: '"IBM Plex Sans Arabic", sans-serif' }} className="scroll-smooth bg-gradient-to-br from-white via-slate-50 to-slate-100 text-slate-800">
+      <main
+        dir="rtl"
+        style={{ fontFamily: '"IBM Plex Sans Arabic", sans-serif' }}
+        className="scroll-smooth bg-gradient-to-br from-white via-slate-50 to-slate-100 text-slate-800"
+      >
         {/* HERO */}
         <header className="relative isolate overflow-hidden pt-28 pb-32">
-          <div className="absolute inset-0 -z-10 bg-[url('/images/D924F00A.png')] bg-cover opacity-40" />
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 text-center">
+          <div
+            className="absolute inset-0 -z-10 bg-[url('/images/D924F00A.png')] bg-cover opacity-40"
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 text-center"
+          >
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#8166E4] via-[#828BE6] to-[#83AFE9] drop-shadow-md">
-              فيا ديف, للحلول البرمجية
+              فيا ديف، للحلول البرمجية
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-slate-600 mb-10 max-w-3xl mx-auto">
               نُحوّل أفكارك إلى منصات رقمية مُبهرة، تدفع أعمالك نحو المستقبل.
             </p>
             <div className="flex flex-wrap justify-center gap-3 mb-12">
               {["إبداع", "موثوقية", "احترافية"].map((tag) => (
-                <span key={tag} className="rounded-full bg-white/60 backdrop-blur border border-white/70 px-5 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:shadow-md transition">
+                <span
+                  key={tag}
+                  className="rounded-full bg-white/60 backdrop-blur border border-white/70 px-5 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:shadow-md transition"
+                >
                   {tag}
                 </span>
               ))}
             </div>
-            <a href="#our-products" className="inline-block rounded-full bg-[#8054E3] px-10 py-4 text-white font-semibold tracking-wide shadow-lg hover:bg-[#6F47CE] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8054E3] transition">
+            <a
+              href="#our-products"
+              className="inline-block rounded-full bg-[#8054E3] px-10 py-4 text-white font-semibold tracking-wide shadow-lg hover:bg-[#6F47CE] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8054E3] transition"
+            >
               اكتشف منتجاتنا
             </a>
           </motion.div>
         </header>
-
 
         {/* PRODUCTS */}
         <motion.section
@@ -121,21 +145,23 @@ export default function LandingPage() {
         >
           <div className="absolute inset-0 -z-10 pointer-events-none bg-gradient-to-b from-transparent via-indigo-50 to-transparent" />
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-            <h1 className="section-title text-3xl text-slate-1000 mb-16">منتجاتنا</h1>
-            {/* Slider showcasing product images */}
+            <h1 className="section-title text-3xl mb-16">منتجاتنا</h1>
+
+            {/* Slider */}
             <div className="mb-16">
               <Slider {...sliderSettings}>
                 {products.map((prod) => (
                   <div key={prod.id} className="px-2">
-                    <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden rounded-3xl">
+                    <div className="relative h-64 sm:h-80 md:h-96 rounded-3xl group relative flex flex-col overflow-hidden rounded-3xl bg-white/70 backdrop-blur border border-slate-200 transition-all">
                       <Image
-                        src={prod.img}
+                        src={"/images/faya-erp.png"}
                         alt={prod.title}
                         fill
-                        className="object-cover w-full h-full"
+                        unoptimized
+                        className="object-cover"
                         sizes="(min-width: 768px) 70vw, 90vw"
                       />
-                      <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+                      <div className="absolute inset-0 flex items-end p-4">
                         <h3 className="text-white text-xl font-semibold">{prod.title}</h3>
                       </div>
                     </div>
@@ -144,7 +170,7 @@ export default function LandingPage() {
               </Slider>
             </div>
 
-            {/* Slider that allows uploading custom images */}
+            {/* Grid */}
             <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {products.map((prod) => (
                 <motion.article
@@ -157,6 +183,7 @@ export default function LandingPage() {
                       src={prod.img}
                       alt={prod.title}
                       fill
+                      unoptimized
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(min-width: 1024px) 250px, 40vw"
                     />
@@ -166,7 +193,10 @@ export default function LandingPage() {
                     <p className="text-sm text-slate-600 flex-grow leading-relaxed min-h-[3rem]">
                       {prod.desc}
                     </p>
-                    <a href={prod.link} className="mt-auto self-start inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-700 font-medium transition">
+                    <a
+                      href={prod.link}
+                      className="mt-auto self-start inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-700 font-medium transition"
+                    >
                       المزيد →
                     </a>
                   </div>
@@ -191,7 +221,7 @@ export default function LandingPage() {
                   >
                     <div className="absolute inset-0 bg-white/50 mix-blend-overlay" />
                     <div className="relative z-10 flex items-start justify-between gap-4 mb-6">
-                      <Icon className="text-3xl shrink-0 text-slate-700" />
+                      <Icon className="text-3xl text-slate-700" />
                       {svc.badge && (
                         <span className="rounded-full bg-white/90 backdrop-blur px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm">
                           {svc.badge}
@@ -222,9 +252,13 @@ export default function LandingPage() {
               جاهز لإطلاق مشروعك الرقمي؟
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
-              اتصل بنا اليوم واحصل على استشارة مجانية مع خبراء فيا ديف لتحديد المتطلبات، وضع خارطة الطريق، والبدء في التنفيذ.
+              اتصل بنا اليوم واحصل على استشارة مجانية مع خبراء فيا ديف لتحديد المتطلبات،
+              وضع خارطة الطريق، والبدء في التنفيذ.
             </p>
-            <a href="https://wa.me/9647822445666" className="inline-block rounded-full bg-emerald-600 px-12 py-4 text-white font-semibold shadow-lg hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition">
+            <a
+              href="https://wa.me/9647822445666"
+              className="inline-block rounded-full bg-emerald-600 px-12 py-4 text-white font-semibold shadow-lg hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition"
+            >
               اتصل عبر واتساب
             </a>
           </div>
