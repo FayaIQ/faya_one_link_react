@@ -109,6 +109,7 @@ export default function LandingPage() {
           </motion.div>
         </header>
 
+
         {/* PRODUCTS */}
         <motion.section
           id="our-products"
