@@ -31,17 +31,15 @@ export default function SupabaseSlider() {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const { data, error } = await supabase.storage
-        .from('images')
-        .list('', { limit: 100, offset: 0, sortBy: { column: 'name', order: 'desc' } });
+      const { data, error } = await supabase
+        .from('dashboard_images')
+        .select('url')
+        .order('created_at', { ascending: false });
       if (error) {
         console.error('Error fetching images', error);
         return;
       }
-      const urls = data.map((file) =>
-        supabase.storage.from('images').getPublicUrl(file.name).data.publicUrl,
-      );
-      setImages(urls);
+      setImages(data.map((row) => row.url));
     };
     fetchImages();
   }, []);

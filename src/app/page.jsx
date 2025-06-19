@@ -112,6 +112,13 @@ export default function LandingPage() {
           </motion.div>
         </header>
 
+        {/* SLIDER */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+            <SupabaseSlider />
+          </div>
+        </section>
+
         {/* PRODUCTS */}
         <motion.section
           id="our-products"
@@ -124,11 +131,6 @@ export default function LandingPage() {
           <div className="absolute inset-0 -z-10 pointer-events-none bg-gradient-to-b from-transparent via-indigo-50 to-transparent" />
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
             <h1 className="section-title text-3xl mb-16">منتجاتنا</h1>
-
-            {/* Slider */}
-            <div className="mb-16">
-              <SupabaseSlider />
-            </div>
 
             {/* Grid */}
             <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
