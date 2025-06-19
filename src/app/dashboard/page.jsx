@@ -3,13 +3,16 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabaseClient';
 
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
+async function uploadToStorage(file) {
+  const filePath = `${Date.now()}-${file.name}`;
+  const { error: upErr } = await supabase
+    .storage
+    .from('images')
+    .upload(filePath, file);
+  if (upErr) {
+    throw upErr;
+  }
+  return supabase.storage.from('images').getPublicUrl(filePath).data.publicUrl;
 }
 
 export default function Dashboard() {
@@ -24,7 +27,7 @@ export default function Dashboard() {
   async function fetchImages() {
     const { data, error } = await supabase
       .from('dashboard_images')
-      .select('id, file_name, content, created_at')
+      .select('id, file_name, url, created_at')
       .order('created_at', { ascending: false });
     if (error) {
       console.error('Error loading images', error);
@@ -32,7 +35,7 @@ export default function Dashboard() {
       const items = data.map((row) => ({
         id: row.id,
         file_name: row.file_name,
-        content: row.content,
+        url: row.url,
         selected: false,
       }));
       setImages(items);
@@ -44,10 +47,10 @@ export default function Dashboard() {
     if (!file) return;
     setUploading(true);
     try {
-      const base64 = await fileToBase64(file);
+      const url = await uploadToStorage(file);
       const { error } = await supabase.from('dashboard_images').insert({
         file_name: file.name,
-        content: base64,
+        url,
       });
       setUploading(false);
       if (error) {
@@ -57,7 +60,7 @@ export default function Dashboard() {
       }
     } catch (err) {
       setUploading(false);
-      console.error('file encode error', err);
+      console.error('upload error', err);
     }
   }
 
@@ -75,11 +78,15 @@ export default function Dashboard() {
   }
 
   async function deleteImage(id) {
+    const img = images.find((i) => i.id === id);
     const { error } = await supabase
       .from('dashboard_images')
       .delete()
       .eq('id', id);
     if (!error) {
+      if (img) {
+        await supabase.storage.from('images').remove([img.file_name]);
+      }
       fetchImages();
     } else {
       console.error('delete error', error);
@@ -94,6 +101,10 @@ export default function Dashboard() {
       .delete()
       .in('id', ids);
     if (!error) {
+      const names = images.filter((i) => ids.includes(i.id)).map((i) => i.file_name);
+      if (names.length) {
+        await supabase.storage.from('images').remove(names);
+      }
       fetchImages();
     } else {
       console.error('bulk delete error', error);
@@ -103,10 +114,14 @@ export default function Dashboard() {
   async function handleReplace(id, file) {
     if (!file) return;
     try {
-      const base64 = await fileToBase64(file);
+      const img = images.find((i) => i.id === id);
+      if (img) {
+        await supabase.storage.from('images').remove([img.file_name]);
+      }
+      const url = await uploadToStorage(file);
       const { error } = await supabase
         .from('dashboard_images')
-        .update({ file_name: file.name, content: base64 })
+        .update({ file_name: file.name, url })
         .eq('id', id);
       if (error) {
         alert('حدث خطأ أثناء التعديل');
@@ -163,7 +178,7 @@ export default function Dashboard() {
               onChange={() => toggleSelect(idx)}
             />
             <Image
-              src={`data:image/*;base64,${img.content}`}
+              src={img.url}
               alt={img.file_name}
               width={400}
               height={200}

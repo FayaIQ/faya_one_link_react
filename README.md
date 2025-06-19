@@ -1,6 +1,6 @@
 # faya-one-link
 
-This project is a small Next.js application. The dashboard now saves uploaded images directly inside a database table rather than a storage bucket. A slideshow on the landing page displays the saved images.
+This project is a small Next.js application. The dashboard uploads images to a Supabase Storage bucket and stores the public URL in a database table. A slideshow on the landing page displays these saved images.
 
 ## Setup
 
