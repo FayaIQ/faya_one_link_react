@@ -3,6 +3,15 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabaseClient';
 
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function Dashboard() {
   const [images, setImages] = useState([]);
   const [uploading, setUploading] = useState(false);
@@ -13,15 +22,17 @@ export default function Dashboard() {
   }, []);
 
   async function fetchImages() {
-    const { data, error } = await supabase.storage
-      .from('images')
-      .list('', { limit: 100, offset: 0, sortBy: { column: 'name', order: 'desc' } });
+    const { data, error } = await supabase
+      .from('dashboard_images')
+      .select('id, file_name, content, created_at')
+      .order('created_at', { ascending: false });
     if (error) {
       console.error('Error loading images', error);
     } else {
-      const items = data.map((file) => ({
-        name: file.name,
-        url: supabase.storage.from('images').getPublicUrl(file.name).data.publicUrl,
+      const items = data.map((row) => ({
+        id: row.id,
+        file_name: row.file_name,
+        content: row.content,
         selected: false,
       }));
       setImages(items);
@@ -32,14 +43,21 @@ export default function Dashboard() {
     const file = e.target.files[0];
     if (!file) return;
     setUploading(true);
-    const { error } = await supabase.storage
-      .from('images')
-      .upload(`${Date.now()}_${file.name}`, file);
-    setUploading(false);
-    if (error) {
-      alert('حدث خطأ أثناء الرفع');
-    } else {
-      fetchImages();
+    try {
+      const base64 = await fileToBase64(file);
+      const { error } = await supabase.from('dashboard_images').insert({
+        file_name: file.name,
+        content: base64,
+      });
+      setUploading(false);
+      if (error) {
+        alert('حدث خطأ أثناء الرفع');
+      } else {
+        fetchImages();
+      }
+    } catch (err) {
+      setUploading(false);
+      console.error('file encode error', err);
     }
   }
 
@@ -56,8 +74,11 @@ export default function Dashboard() {
     setImages(images.map((img) => ({ ...img, selected: next })));
   }
 
-  async function deleteImage(name) {
-    const { error } = await supabase.storage.from('images').remove([name]);
+  async function deleteImage(id) {
+    const { error } = await supabase
+      .from('dashboard_images')
+      .delete()
+      .eq('id', id);
     if (!error) {
       fetchImages();
     } else {
@@ -66,9 +87,12 @@ export default function Dashboard() {
   }
 
   async function deleteSelected() {
-    const names = images.filter((i) => i.selected).map((i) => i.name);
-    if (names.length === 0) return;
-    const { error } = await supabase.storage.from('images').remove(names);
+    const ids = images.filter((i) => i.selected).map((i) => i.id);
+    if (ids.length === 0) return;
+    const { error } = await supabase
+      .from('dashboard_images')
+      .delete()
+      .in('id', ids);
     if (!error) {
       fetchImages();
     } else {
@@ -76,15 +100,21 @@ export default function Dashboard() {
     }
   }
 
-  async function handleReplace(name, file) {
+  async function handleReplace(id, file) {
     if (!file) return;
-    const { error } = await supabase.storage
-      .from('images')
-      .upload(name, file, { upsert: true });
-    if (error) {
-      alert('حدث خطأ أثناء التعديل');
-    } else {
-      fetchImages();
+    try {
+      const base64 = await fileToBase64(file);
+      const { error } = await supabase
+        .from('dashboard_images')
+        .update({ file_name: file.name, content: base64 })
+        .eq('id', id);
+      if (error) {
+        alert('حدث خطأ أثناء التعديل');
+      } else {
+        fetchImages();
+      }
+    } catch (err) {
+      console.error('replace error', err);
     }
   }
 
@@ -125,14 +155,21 @@ export default function Dashboard() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {images.map((img, idx) => (
-          <div key={img.name} className="relative rounded-lg overflow-hidden shadow border bg-white">
+          <div key={img.id} className="relative rounded-lg overflow-hidden shadow border bg-white">
             <input
               type="checkbox"
               className="absolute top-2 right-2 w-4 h-4"
               checked={img.selected}
               onChange={() => toggleSelect(idx)}
             />
-            <Image src={img.url} alt={img.name} width={400} height={200} className="w-full h-48 object-cover" unoptimized />
+            <Image
+              src={`data:image/*;base64,${img.content}`}
+              alt={img.file_name}
+              width={400}
+              height={200}
+              className="w-full h-48 object-cover"
+              unoptimized
+            />
             <div className="flex justify-between p-2">
               <>
                 <button
@@ -145,11 +182,11 @@ export default function Dashboard() {
                   type="file"
                   id={`replace-${idx}`}
                   className="hidden"
-                  onChange={(e) => handleReplace(img.name, e.target.files[0])}
+                  onChange={(e) => handleReplace(img.id, e.target.files[0])}
                 />
               </>
               <button
-                onClick={() => deleteImage(img.name)}
+                onClick={() => deleteImage(img.id)}
                 className="rounded bg-red-500 px-3 py-1 text-sm text-white"
               >
                 حذف
