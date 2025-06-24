@@ -83,9 +83,8 @@ const sliderSettings = {
 
 // —————————— مصفوفة صور السلايدر ——————————
 const sliderImages = [
-  "/sliderimges/faya-Agents.png",
-  "/sliderimges/faya-Survey.png",
-  "/sliderimges/faya-Staff.png"
+  "/sliderimges/slide1.jpg",
+  "/sliderimges/slide1.jpg"
 ];
 
 export default function LandingPage() {
