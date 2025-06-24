@@ -38,10 +38,10 @@ const products = [
   { id: 1, title: "Faya ERP",     desc: "منصة متكاملة لإدارة أنشطة المؤسسات",    img: "/images/faya-erp.png",     link: "https://erp.faya.dev/" },
   { id: 2, title: "Faya E-Menu",  desc: "تطبيق يقدم للمطاعم منيو إلكتروني متكامل", img: "/images/faya-menu.png",    link: "https://emenu.faya.dev/" },
   { id: 3, title: "Faya Press",   desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-press.png",   link: "/products/faya-press" },
-  { id: 4, title: "Faya Staff",   desc: "إدارة الموارد البشرية وجدولة الموظفين",     img: "/images/faya-staff.png",   link: "/products/faya-staff" },
+  { id: 4, title: "Faya Staff",   desc: "إدارة الموارد البشرية وجدولة الموظفين", img: "/images/faya-staff.png",   link: "/products/faya-staff" },
   { id: 5, title: "Faya CRM",     desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-CRM.png",     link: "https://teams.faya.dev/#/FayaCRM" },
   { id: 6, title: "Faya OneLink", desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-Onelink.png", link: "https://teams.faya.dev/#/FayaOneLink" },
-  { id: 7, title: "Faya Survey",  desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-Survey.png", link: "https://teams.faya.dev/#/fayaSurvey" },
+  { id: 7, title: "Faya Survey",  desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-Survey.png",  link: "https://teams.faya.dev/#/fayaSurvey" },
   { id: 8, title: "Faya RX",      desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-RX.png",      link: "https://rx.faya.dev/" }
 ];
 
@@ -60,26 +60,34 @@ const gradients = [
 
 // —————————— إعدادات السلايدر ——————————
 const sliderSettings = {
-  dots: true,                   // تفعيل عداد النقاط :contentReference[oaicite:0]{index=0}
-  infinite: true,               // للتكرار اللانهائي
-  speed: 800,                   // سرعة التحريك (مللي ثواني)
-  slidesToShow: 1,              // شريحة واحدة ظاهرة
-  slidesToScroll: 1,            // التمرير شريحة واحدة في كل مرة
-  autoplay: true,               // تفعيل التشغيل التلقائي :contentReference[oaicite:1]{index=1}
-  autoplaySpeed: 3000,          // المدة بين كل انتقال (3 ثواني)
-  pauseOnHover: true,           // إيقاف مؤقت عند المرور بالفأرة
+  dots: true,
+  infinite: true,
+  speed: 800,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  pauseOnHover: true,
   appendDots: dots => (
     <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
       <ul className="flex space-x-2 pointer-events-auto">{dots}</ul>
     </div>
-  ),                             // وضع النقاط في منتصف السلايدر :contentReference[oaicite:2]{index=2}
+  ),
   customPaging: i => (
     <button
       className="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200"
       aria-label={`شريحة ${i + 1}`}
     />
-  )                              // تصميم مخصص لكل نقطة
+  )
 };
+
+// —————————— مصفوفة صور السلايدر ——————————
+const sliderImages = [
+  "/sliderimges/faya-Agents.png",
+  "/sliderimges/faya-Survey.png",
+  "/sliderimges/faya-Staff.png"
+];
+
 export default function LandingPage() {
   return (
     <>
@@ -116,7 +124,7 @@ export default function LandingPage() {
               نُحوّل أفكارك إلى منصات رقمية مُبهرة، تدفع أعمالك نحو المستقبل.
             </p>
             <div className="flex flex-wrap justify-center gap-3 mb-12">
-              {["إبداع", "موثوقية", "احترافية"].map((tag) => (
+              {["إبداع", "موثوقية", "احترافية"].map(tag => (
                 <span
                   key={tag}
                   className="rounded-full bg-white/60 backdrop-blur border border-white/70 px-5 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:shadow-md transition"
@@ -150,20 +158,17 @@ export default function LandingPage() {
             {/* Slider */}
             <div className="mb-16">
               <Slider {...sliderSettings}>
-                {products.map((prod) => (
-                  <div key={prod.id} className="px-2">
-                    <div className="relative h-64 sm:h-80 md:h-96 rounded-3xl group relative flex flex-col overflow-hidden rounded-3xl bg-white/70 backdrop-blur border border-slate-200 transition-all">
+                {sliderImages.map((src, idx) => (
+                  <div key={idx} className="px-2">
+                    <div className="relative h-64 sm:h-80 md:h-96 rounded-3xl bg-white/70 backdrop-blur border border-slate-200 overflow-hidden transition-all">
                       <Image
-                        src={"/images/faya-erp.png"}
-                        alt={prod.title}
+                        src={src}
+                        alt={`Slide ${idx + 1}`}
                         fill
                         unoptimized
                         className="object-cover"
                         sizes="(min-width: 768px) 70vw, 90vw"
                       />
-                      <div className="absolute inset-0 flex items-end p-4">
-                        <h3 className="text-white text-xl font-semibold">{prod.title}</h3>
-                      </div>
                     </div>
                   </div>
                 ))}
@@ -172,7 +177,7 @@ export default function LandingPage() {
 
             {/* Grid */}
             <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-              {products.map((prod) => (
+              {products.map(prod => (
                 <motion.article
                   key={prod.id}
                   className="group relative flex flex-col overflow-hidden rounded-3xl bg-white/70 backdrop-blur border border-slate-200 shadow-lg hover:shadow-xl transition-all"
