@@ -35,14 +35,15 @@ const services = [
 
 // —————————— بيانات المنتجات ——————————
 const products = [
-  { id: 1, title: "Faya ERP",     desc: "منصة متكاملة لإدارة أنشطة المؤسسات",    img: "/images/faya-erp.png",     link: "https://erp.faya.dev/" },
-  { id: 2, title: "Faya E-Menu",  desc: "تطبيق يقدم للمطاعم منيو إلكتروني متكامل", img: "/images/faya-menu.png",    link: "https://emenu.faya.dev/" },
-  { id: 3, title: "Faya Press",   desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-press.png",   link: "/products/faya-press" },
-  { id: 4, title: "Faya Staff",   desc: "إدارة الموارد البشرية وجدولة الموظفين", img: "/images/faya-staff.png",   link: "/products/faya-staff" },
-  { id: 5, title: "Faya CRM",     desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-CRM.png",     link: "https://teams.faya.dev/#/FayaCRM" },
-  { id: 6, title: "Faya OneLink", desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-Onelink.png", link: "https://teams.faya.dev/#/FayaOneLink" },
-  { id: 7, title: "Faya Survey",  desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-Survey.png",  link: "https://teams.faya.dev/#/fayaSurvey" },
-  { id: 8, title: "Faya RX",      desc: "نظام إصدار الفواتير والإشعارات بسهولة",   img: "/images/faya-RX.png",      link: "https://rx.faya.dev/" }
+  { id: 1, title: "Faya ERP",     desc: " Faya ERP منصة متكاملة تدير المتاجر إلكترونيًّا، تجمع المنتجات والمخزون والطلبات والعملاء والدفع والتوصيل في لوحة مرنة قابلة للتخصيص، مع تقارير ذكية لحظية وبيانات تعزّز المبيعات",    img: "/images/faya-erp.png",     link: "https://erp.faya.dev/" },
+  { id: 2, title: "Faya E-Menu",  desc: "المنيو الإلكتروني من Faya هو واجهة رقمية تفاعلية ومتعددة اللغات تُمكّن الزبائن من تصفّح الأطباق بصور وأسعار محدثة بتصميم مُخصص يعكس هوية المطعم ويعزز تجربة الطلب", img: "/images/faya-menu.png",    link: "https://emenu.faya.dev/" },
+  { id: 3, title: "Faya Press",   desc: "نظام مواقع تعريفية من Faya يتيح لأصحاب المشاريع عرض معلوماتهم بخطة تصميم فريدة متوافقة مع هوية العلامة، يشمل الأقسام الأساسية، ويقدّم واجهة مرنة ومتجاوبة لجميع الأجهزة",   img: "/images/faya-press.png",   link: "/products/faya-press" },
+  { id: 4, title: "Faya Staff",   desc: "Faya Staff نظام متكامل لإدارة شؤون الموظفين يوفر تتبعًا دقيقًا لساعات العمل وتسجيل الدخول والخروج، ومراقبة النشاط عبر لقطات شاشة دورية مع تقارير تحليلية شاملة لتعزيز الشفافية والكفاءة في بيئة العمل", img: "/images/faya-staff.png",   link: "/products/faya-staff" },
+  { id: 5, title: "Faya CRM",     desc: "Faya CRM منصة شاملة لتنظيم بيانات العملاء وتتبع المبيعات وإطلاق حملات تسويقية مخصصة لكل موظف، مع أدوات تحليلية وتقارير دقيقة لدعم اتخاذ قرارات تسويقية مستنيرة",   img: "/images/faya-CRM.png",     link: "https://teams.faya.dev/#/FayaCRM" },
+  { id: 6, title: "Faya OneLink", desc: "onelink من Faya أداة ذكية تجمع جميع روابط وخدمات الشركة في صفحة رقمية شخصية موحدة ببصمة العلامة، مريحة وسريعة للعرض في ملفات التواصل والوصول المباشر للعملاء",   img: "/images/faya-Onelink.png", link: "https://teams.faya.dev/#/FayaOneLink" },
+  { id: 7, title: "Faya Survey",  desc: "نظام الاستبيانات من Faya يُنشئ نماذج تفاعلية تدعم QR سهل الوصول، يجمع ردود العملاء والموظفين بدقّة، ويقدّم تقارير تحليلية فورية وتصدير PDF موثوق فعّال لتعزيز التطوير",   img: "/images/faya-Survey.png",  link: "https://teams.faya.dev/#/fayaSurvey" },
+  { id: 8, title: "Faya RX",      desc: "Faya RX منصة رقمية متطورة للأطباء والعيادات لإدارة الوصفات الطبية ومتابعة المرضى وتنظيم المواعيد عبر نسختين مخصصتين للطبيب والسكرتير، مع تعزيز التواصل وكفاءة العمليات",   img: "/images/faya-RX.png",      link: "https://rx.faya.dev/" },
+  { id: 9, title: "Faya Agents",      desc: "Faya RX نظام رقمي متطور للأطباء والعيادات لإدارة الوصفات الطبية ومتابعة المرضى وتنظيم المواعيد عبر نسختين مخصصتين للطبيب والسكرتير، مع تعزيز التواصل وكفاءة العمليات",   img: "/images/faya-Agents.png",      link: "" }
 ];
 
 // —————————— تدرجات الألوان للكروت ——————————
@@ -84,7 +85,7 @@ const sliderSettings = {
 // —————————— مصفوفة صور السلايدر ——————————
 const sliderImages = [
   "/sliderimges/slide1.jpg",
-  "/sliderimges/slide1.jpg"
+  "/sliderimges/slide2.jpg"
 ];
 
 export default function LandingPage() {
